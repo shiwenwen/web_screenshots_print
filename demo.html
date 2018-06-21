@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试截取保存或打印</title>
+    <script type="text/javascript" src="libs/jquery-2.1.0.js"></script>
+    <script type="text/javascript" src="libs/html2canvas.js"></script>
+    <script type="text/javascript" src="libs/jQuery.print.js"></script>
+    <script type="text/javascript" src="libs/jcanvas.min.js"></script>
+    <script type="text/javascript" src="js/screenPrint.js"></script>
+    <style>
+        body, html {
+            width: 100%;
+            height: 100%;
+        }
+        .print {
+            position: relative;
+            z-index: 100;
+        }
+        h1 {
+            color: orangered;
+        }
+        h2 {
+            color: darkblue;
+        }
+        h2 {
+            color: forestgreen;
+        }
+    </style>
+</head>
+<body>
+<button class="print">截图打印</button>
+<div>
+    <h1>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</h1>
+    <h2>嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿嘿</h2>
+    <h3>呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵呵</h3>
+    <br/>
+    <p>这是一张跨域图片</p>
+    <img src="https://sww-wordpress.oss-cn-beijing.aliyuncs.com/2018/06/avengers_200.png" alt="来个跨区的图片">
+
+</div>
+
+<canvas id="bg_convas" width="100%" height="100%" style="position: absolute; left: 0; top: 0;"/>
+<script>
+    $(function(){
+        var clientWidth = document.documentElement.clientWidth || document.body.clientWidth
+        var clientHeight = document.documentElement.clientHeight || document.body.clientHeight
+        $("#bg_convas").attr("width", clientWidth);
+        $("#bg_convas").attr("height", clientHeight);
+        $("#bg_convas").hide();
+        $(".print").click(function(){
+            $("#bg_convas").show()
+            alert('现在你可以使用鼠标拖拽选取打印区域，松开后开始打印')
+            clipScreenshots("bg_convas");
+        });
+
+
+    });
+</script>
+</body>
+</html>
+
