@@ -2,10 +2,10 @@
  * 默认画笔线宽
  * @type {number}
  */
-var defaultStrokeWidth = 1;
+var defaultStrokeWidth = 1; //画矩形选取框的线宽
 
 /**
- * 选取划线的canvas
+ * 选取划线的canvasExt
  * @type {{drawRect: canvasExt.drawRect}}
  */
 var canvasExt = {
@@ -17,6 +17,7 @@ var canvasExt = {
      */
     drawRect: function (canvasId, penColor, strokeWidth) {
         var that = this;
+
         that.penColor = penColor;
         that.penWidth = strokeWidth;
         var canvas = document.getElementById(canvasId);
@@ -109,29 +110,37 @@ var canvasExt = {
             html2canvas(document.body, {
                 scale: 1,
                 // allowTaint: true,
-                useCORS: true
+                useCORS: true  //跨域使用
             }).then(canvas => {
                 var capture_x, capture_y
                 if (width > 0) {
+                    //从左往右画
                     capture_x = x + that.penWidth
                 }else {
+                    //从右往左画
                     capture_x = x + width + that.penWidth
                 }
                 if (height > 0) {
+                    //从上往下画
                     capture_y = y + that.penWidth
                 }else {
+                    //从下往上画
                     capture_y = y + height + that.penWidth
                 }
                 printClip(canvas, capture_x, capture_y, Math.abs(width), Math.abs(height))
             });
             // 移除画的选取框
             $("#"+canvasId).removeLayer('areaLayer');
-            // 隐藏
+            // 隐藏用于华画取框的canvas
             $("#"+canvasId).hide()
         }
     }
 };
 
+/**
+ * 选取截屏
+ * @param canvasId
+ */
 function clipScreenshots(canvasId){
     canvasExt.drawRect(canvasId, "red", defaultStrokeWidth);
 }
