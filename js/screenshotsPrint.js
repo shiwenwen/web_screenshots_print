@@ -8,7 +8,7 @@ var defaultStrokeWidth = 1;
  * 选取划线的canvas
  * @type {{drawRect: canvasExt.drawRect}}
  */
-var _canvasExt = {
+var canvasExt = {
     /**
      *  画矩形
      * @param canvasId canvasId
@@ -134,7 +134,7 @@ var _canvasExt = {
 
 
 function clipScreenshots(canvasId){
-    _canvasExt.drawRect(canvasId, "red", defaultStrokeWidth);
+    canvasExt.drawRect(canvasId, "red", defaultStrokeWidth);
 }
 
 
