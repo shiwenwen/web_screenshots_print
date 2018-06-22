@@ -85,7 +85,6 @@ var _canvasExt = {
             var penWidth = that.penWidth;
 
             canvas.onmousemove = null;
-            // 记录截屏宽高
 
             var width = e.clientX - canvasLeft - x;
             var height = e.clientY- canvasTop - y;
@@ -112,8 +111,18 @@ var _canvasExt = {
                 // allowTaint: true,
                 useCORS: true
             }).then(canvas => {
-                printClip(canvas, x + that.penWidth, y + that.penWidth, width, height)
-
+                var capture_x, capture_y
+                if (width > 0) {
+                    capture_x = x + that.penWidth
+                }else {
+                    capture_x = x + width + that.penWidth
+                }
+                if (height > 0) {
+                    capture_y = y + that.penWidth
+                }else {
+                    capture_y = y + height + that.penWidth
+                }
+                printClip(canvas, capture_x, capture_y, Math.abs(width), Math.abs(height))
             });
             // 移除画的选取框
             $("#"+canvasId).removeLayer('areaLayer');
@@ -148,10 +157,15 @@ function printClip(canvas, capture_x, capture_y, capture_width, capture_height) 
     // 生成图片
     var clipImg = new Image()
     clipImg.src = clipImgBase64
+    var con = confirm('打印截图吗?取消则保存截图')
+    if (con) {
+        $(clipImg).print()
+    }else {
+        downloadIamge(clipImgBase64)
+    }
 
-    $(clipImg).print()
 
-    // downloadIamge(clipImgBase64)
+
 }
 
 /**
