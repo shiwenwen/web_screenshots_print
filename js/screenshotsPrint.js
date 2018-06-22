@@ -132,11 +132,9 @@ var canvasExt = {
     }
 };
 
-
 function clipScreenshots(canvasId){
     canvasExt.drawRect(canvasId, "red", defaultStrokeWidth);
 }
-
 
 /**
  * 打印截取区域
@@ -163,9 +161,6 @@ function printClip(canvas, capture_x, capture_y, capture_width, capture_height) 
     }else {
         downloadIamge(clipImgBase64)
     }
-
-
-
 }
 
 /**
