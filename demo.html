@@ -8,7 +8,7 @@
     <script type="text/javascript" src="libs/html2canvas.js"></script>
     <script type="text/javascript" src="libs/jQuery.print.js"></script>
     <script type="text/javascript" src="libs/jcanvas.min.js"></script>
-    <script type="text/javascript" src="js/screenPrint.js"></script>
+    <script type="text/javascript" src="js/screenshotsPrint.js"></script>
     <style>
         body, html {
             width: 100%;
@@ -38,21 +38,23 @@
     <br/>
     <p>这是一张跨域图片</p>
     <img src="http://p7.qhimg.com/t01ceede0272d4b5a8b.png" alt="来个跨区的图片">
-
 </div>
-
-<canvas id="bg_convas" width="100%" height="100%" style="position: absolute; left: 0; top: 0;"/>
+<!-- 用于画选取框的canvas -->
+<canvas id="bg_canvas" width="100%" height="100%" />
 <script>
     $(function(){
         var clientWidth = document.documentElement.clientWidth || document.body.clientWidth
         var clientHeight = document.documentElement.clientHeight || document.body.clientHeight
-        $("#bg_convas").attr("width", clientWidth);
-        $("#bg_convas").attr("height", clientHeight);
-        $("#bg_convas").hide();
+        // 更新canvas宽高
+        $("#bg_canvas").attr("width", clientWidth);
+        $("#bg_canvas").attr("height", clientHeight);
+        
+        $("#bg_canvas").hide();
         $(".print").click(function(){
-            $("#bg_convas").show()
+            $("#bg_canvas").show()
             alert('现在你可以使用鼠标拖拽选取打印区域，松开后完成')
-            clipScreenshots("bg_convas");
+            //调用选取截屏
+            clipScreenshots("bg_canvas");
         });
 
 
